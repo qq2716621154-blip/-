@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户注册登录系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    }
+    
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .forms-container {
+      display: flex;
+      width: 200%;
+      transition: transform 0.6s ease-in-out;
+    }
+    
+    .form-wrapper {
+      width: 50%;
+      padding: 40px;
+      transition: opacity 0.6s ease-in-out;
+    }
+    
+    .form-wrapper h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .switch-form {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .switch-form p {
+      color: #666;
+    }
+    
+    .switch-form a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .switch-form a:hover {
+      text-decoration: underline;
+    }
+    
+    .separator {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+    }
+    
+    .separator hr {
+      flex: 1;
+      border: none;
+      border-top: 1px solid #e1e5e9;
+    }
+    
+    .separator span {
+      padding: 0 15px;
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .social-login {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+    
+    .social-btn {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .social-btn:hover {
+      background: #f8f9fa;
+      border-color: #667eea;
+    }
+    
+    .social-btn i {
+      font-size: 18px;
+    }
+    
+    .fa-google {
+      color: #db4437;
+    }
+    
+    .fa-weixin {
+      color: #07c160;
+    }
+    
+    .fa-qq {
+      color: #12b7f5;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 0 20px;
+      }
+      
+      .form-wrapper {
+        padding: 30px 20px;
+      }
+      
+      .social-login {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <!-- 登录表单 -->
+      <div class="form-wrapper" id="login-form">
+        <h1>用户登录</h1>
+        
+        <div class="form-group">
+          <label for="login-username">用户名</label>
+          <input type="text" id="login-username" placeholder="请输入用户名">
+        </div>
+        
+        <div class="form-group">
+          <label for="login-password">密码</label>
+          <input type="password" id="login-password" placeholder="请输入密码">
+        </div>
+        
+        <button class="btn" id="login-btn">登录</button>
+        
+        <div class="switch-form">
+          <p>还没有账号？ <a id="switch-to-register">立即注册</a></p>
+        </div>
+        
+        <div class="separator">
+          <hr><span>其他登录方式</span><hr>
+        </div>
+        
+        <div class="social-login">
+          <button class="social-btn"><i class="fab fa-google"></i> 谷歌</button>
+          <button class="social-btn"><i class="fab fa-weixin"></i> 微信</button>
+          <button class="social-btn"><i class="fab fa-qq"></i> QQ</button>
+        </div>
+      </div>
+      
+      <!-- 注册表单 -->
+      <div class="form-wrapper" id="register-form">
+        <h1>用户注册</h1>
+        
+        <div class="form-group">
+          <label for="register-username">用户名</label>
+          <input type="text" id="register-username" placeholder="请设置用户名">
+        </div>
+        
+        <div class="form-group">
+          <label for="register-email">邮箱</label>
+          <input type="email" id="register-email" placeholder="请输入邮箱">
+        </div>
+        
+        <div class="form-group">
+          <label for="register-password">密码</label>
+          <input type="password" id="register-password" placeholder="请设置密码">
+        </div>
+        
+        <div class="form-group">
+          <label for="register-confirm-password">确认密码</label>
+          <input type="password" id="register-confirm-password" placeholder="请再次输入密码">
+        </div>
+        
+        <button class="btn" id="register-btn">注册</button>
+        
+        <div class="switch-form">
+          <p>已有账号？ <a id="switch-to-login">立即登录</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 获取DOM元素
+    const formsContainer = document.querySelector('.forms-container');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const switchToRegister = document.getElementById('switch-to-register');
+    const switchToLogin = document.getElementById('switch-to-login');
+    const loginBtn = document.getElementById('login-btn');
+    const registerBtn = document.getElementById('register-btn');
+    
+    // 切换到注册表单
+    switchToRegister.addEventListener('click', () => {
+      formsContainer.style.transform = 'translateX(-50%)';
+    });
+    
+    // 切换到登录表单
+    switchToLogin.addEventListener('click', () => {
+      formsContainer.style.transform = 'translateX(0)';
+    });
+    
+    // 登录按钮点击事件
+    loginBtn.addEventListener('click', () => {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      
+      if (!username || !password) {
+        alert('请输入用户名和密码');
+        return;
+      }
+      
+      // 这里可以添加登录逻辑，目前只是简单的模拟
+      alert(`登录成功！欢迎您，${username}`);
+    });
+    
+    // 注册按钮点击事件
+    registerBtn.addEventListener('click', () => {
+      const username = document.getElementById('register-username').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      
+      if (!username || !email || !password || !confirmPassword) {
+        alert('请填写所有必填字段');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('两次输入的密码不一致');
+        return;
+      }
+      
+      // 简单的邮箱格式验证
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('请输入有效的邮箱地址');
+        return;
+      }
+      
+      // 这里可以添加注册逻辑，目前只是简单的模拟
+      alert('注册成功！请登录');
+      formsContainer.style.transform = 'translateX(0)';
+    });
+  </script>
+</body>
+</html>
